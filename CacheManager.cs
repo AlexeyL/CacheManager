@@ -17,6 +17,13 @@ namespace CacheManager.Concrete
 
         #region ICacheAdapter<T> Members
 
+        /// <summary>
+        /// <para>Method add object to cache</para>
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="obj">object</param>
+        /// <seealso cref="Add(string, T, DateTime)"/>
+        /// <seealso cref="Add(string, T, DateTime, CacheEntryUpdateCallback)"/>
         public void Add(string key, T obj)
         {
             if (!this.cacheInstance.Contains(key))
@@ -30,11 +37,28 @@ namespace CacheManager.Concrete
             }
         }
 
+        /// <summary>
+        /// <para>Method add object to cache</para>
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="obj">object</param>
+        /// <param name="expire">expiration time</param>
+        /// <seealso cref="Add(string, T)"/>
+        /// <seealso cref="Add(string, T, DateTime, CacheEntryUpdateCallback)"/>
         public void Add(string key, T obj, DateTime expire)
         {
             this.Add(key, obj, expire, null);
         }
 
+        /// <summary>
+        /// <para>Method add object to cache</para>
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="obj">object</param>
+        /// <param name="expire">expiration time</param>
+        /// <param name="callback">method that will call befor object will deleted from cache</param>
+        /// <seealso cref="Add(string, T)"/>
+        /// <seealso cref="Add(string, T, DateTime)"/>
         public void Add(string key, T obj, DateTime expire, CacheEntryUpdateCallback callback)
         {
             if (!this.cacheInstance.Contains(key))
@@ -52,6 +76,12 @@ namespace CacheManager.Concrete
             }
         }
 
+        /// <summary>
+        /// <para>Method try to get strongly typed object from cache by key</para>
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="obj">obj</param>
+        /// <return>true if object exist in cache else fasle</return>
         public bool TryGetValue(string key, out T obj)
         {
             bool bSuccess;
